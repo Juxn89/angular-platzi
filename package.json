@@ -1,0 +1,23 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "Curso de TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juxn89/angular-platzi.git"
+  },
+  "keywords": [],
+  "author": "juan.gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juxn89/angular-platzi/issues"
+  },
+  "homepage": "https://github.com/Juxn89/angular-platzi#readme",
+  "devDependencies": {
+    "typescript": "5.5.4"
+  }
+}
