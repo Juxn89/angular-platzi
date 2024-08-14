@@ -4,6 +4,10 @@
   "description": "Curso de TypeScript",
   "main": "index.js",
   "scripts": {
+    "compile:hello": "npx tsc src/02-hello.ts",
+    "compile:hello:target": "npx tsc src/02-hello.ts --target es6",
+    "compile:hello:outDir": "npx tsc src/02-hello.ts --target es6 --outDir dist",
+    "compile:allTS": "npx tsc src/*.ts --target es6 --outDir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
