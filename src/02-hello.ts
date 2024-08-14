@@ -1,2 +1,5 @@
+'use strict'
+
 const myName = 'Luke'
-console.log(myName)
+const myLastName = 'Skywaker'
+console.log({myName, myLastName})
