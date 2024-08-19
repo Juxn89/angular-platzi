@@ -23,4 +23,5 @@
   console.log(product1)
 
   const product2 = createProductToJsonV2('Product #1', new Date(), 1)
+  const algo = 1 + '1'
 })()
