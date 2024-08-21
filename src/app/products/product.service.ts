@@ -1,5 +1,5 @@
 import { Product } from './product.model'
-import { CreateProductDto, UpdateProdctDto } from './product.dto'
+import { CreateProductDto, FindProductDto, UpdateProdctDto } from './product.dto'
 
 export const products: Product[] = []
 
@@ -31,4 +31,8 @@ export const updateProduct = (id: string | number, data: UpdateProdctDto): Produ
   }
 
   return products[index]
+}
+
+export const findProduct = (dto: FindProductDto): Product[] => {
+  return products
 }

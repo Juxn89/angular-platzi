@@ -9,3 +9,5 @@ type example = Pick<Product, 'id' | 'title' | 'size'>
 export interface UpdateProdctDto extends Partial<CreateProductDto> {} // Marl all as optional
 
 type example2 = Required<Product> // Mark all as mandatory
+
+export interface FindProductDto extends Readonly<Partial<Product>> {}
