@@ -1,5 +1,5 @@
 import { Product } from './product.model'
-import { CreateProductDto } from './product.dto'
+import { CreateProductDto, UpdateProdctDto } from './product.dto'
 
 export const products: Product[] = []
 
@@ -18,6 +18,17 @@ export const addProduct = (data: CreateProductDto) => {
   })
 }
 
-export const updateProduct = (id: string, data: CreateProductDto) => {
+export const updateProduct = (id: string | number, data: UpdateProdctDto): Product => {
+  const index = products.findIndex(p => p.id === id)
 
+  if(!index)
+    throw new Error('Product not found')
+
+  const prevData = products[index]
+  products[index] = {
+    ...prevData,
+    ...data
+  }
+
+  return products[index]
 }
