@@ -18,7 +18,7 @@ export const addProduct = (data: CreateProductDto) => {
   })
 }
 
-export const updateProduct = (id: string | number, data: UpdateProdctDto): Product => {
+export const updateProduct = (id: Product['id'], data: UpdateProdctDto): Product => {
   const index = products.findIndex(p => p.id === id)
 
   if(!index)
