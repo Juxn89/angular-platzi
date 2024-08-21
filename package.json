@@ -1,0 +1,24 @@
+{
+  "name": "angular-platzi",
+  "version": "1.0.0",
+  "description": "Repository of all angular's project of Platzi",
+  "main": "index.js",
+  "devDependencies": {
+    "ts-node": "10.9.2",
+    "typescript": "5.5.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juxn89/angular-platzi.git"
+  },
+  "keywords": [],
+  "author": "juan.gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juxn89/angular-platzi/issues"
+  },
+  "homepage": "https://github.com/Juxn89/angular-platzi#readme"
+}
