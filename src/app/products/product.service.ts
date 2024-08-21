@@ -34,5 +34,8 @@ export const updateProduct = (id: Product['id'], data: UpdateProdctDto): Product
 }
 
 export const findProduct = (dto: FindProductDto): Product[] => {
+  dto.tags = []
+  dto.tags?.pop()
+  dto.tags?.push()
   return products
 }

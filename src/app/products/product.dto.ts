@@ -10,4 +10,6 @@ export interface UpdateProdctDto extends Partial<CreateProductDto> {} // Marl al
 
 type example2 = Required<Product> // Mark all as mandatory
 
-export interface FindProductDto extends Readonly<Partial<Product>> {}
+export interface FindProductDto extends Readonly<Partial< Omit<Product, 'tags'> >> {
+  readonly tags: ReadonlyArray<string>
+}
