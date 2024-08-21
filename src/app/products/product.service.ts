@@ -17,3 +17,7 @@ export const addProduct = (data: CreateProductDto) => {
     }
   })
 }
+
+export const updateProduct = (id: string, data: CreateProductDto) => {
+
+}
