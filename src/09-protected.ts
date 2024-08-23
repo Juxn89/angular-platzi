@@ -1,4 +1,4 @@
-export class Animal {
+export abstract class Animal {
   constructor(
     protected name: string
   ) {}
@@ -16,9 +16,9 @@ export class Animal {
   }
 }
 
-const fenryr = new Animal('Fenryr')
-fenryr.move()
-console.log(fenryr.gretting())
+// const fenryr = new Animal('Fenryr')
+// fenryr.move()
+// console.log(fenryr.gretting())
 
 export class Dog extends Animal {
 
