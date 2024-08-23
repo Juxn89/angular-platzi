@@ -4,6 +4,7 @@
   "description": "Repository of all angular's project of Platzi",
   "main": "index.js",
   "devDependencies": {
+    "axios": "1.7.5",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"
   },
