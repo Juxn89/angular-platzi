@@ -26,9 +26,6 @@ export class ProductMemoryService {
   updateProduct (id: Product['id'], data: UpdateProdctDto): Product {
     const index = this.products.findIndex(p => p.id === id)
 
-    if(!index)
-      throw new Error('Product not found')
-
     const prevData = this.products[index]
     this.products[index] = {
       ...prevData,
@@ -40,5 +37,9 @@ export class ProductMemoryService {
 
   findOne (id: Product['id']) {
     return this.products.find(item => item.id === id)
+  }
+
+  getAll (): Product[] {
+    return this.products
   }
 }
