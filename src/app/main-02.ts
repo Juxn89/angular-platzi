@@ -2,7 +2,7 @@ import { ProductMemoryService } from './services/product.service';
 
 const productService = new ProductMemoryService()
 
-productService.add({
+productService.create({
   categoryId: 1,
   title: 'Product #1',
   price: 100,
@@ -15,7 +15,7 @@ productService.add({
 const products = productService.getAll()
 const productId = products[0].id
 
-productService.updateProduct(productId, {
+productService.update(productId, {
   title: 'Product #1 - Updated'
 })
 
