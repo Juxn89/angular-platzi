@@ -4,6 +4,7 @@
   "description": "Repository of all angular's project of Platzi",
   "main": "index.js",
   "devDependencies": {
+    "@faker-js/faker": "8.4.1",
     "axios": "1.7.5",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"

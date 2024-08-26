@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Product } from './mdoels/product.model';
+import { Product } from './models/product.model';
 
 const BASE_URL: string = 'https://api.escuelajs.co/api/v1';
 
