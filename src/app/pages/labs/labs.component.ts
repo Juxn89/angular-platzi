@@ -16,4 +16,13 @@ export class LabsComponent {
     'Create component'
   ]
   private name = 'Zelda'
+  nickName = 'Zelda'
+  disabled = true
+  image = 'https://static.platzi.com/media/achievements/badge-js-bases-84800303-16e4-420d-a934-d02cc60f4727.png'
+
+  person = {
+    nickName: 'Zelda',
+    disabled: true,
+    image: 'https://static.platzi.com/media/achievements/badge-js-bases-84800303-16e4-420d-a934-d02cc60f4727.png'
+  }
 }
