@@ -15,4 +15,5 @@ export class LabsComponent {
     'Create project',
     'Create component'
   ]
+  private name = 'Zelda'
 }
