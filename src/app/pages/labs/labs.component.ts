@@ -25,4 +25,12 @@ export class LabsComponent {
     disabled: true,
     image: 'https://static.platzi.com/media/achievements/badge-js-bases-84800303-16e4-420d-a934-d02cc60f4727.png'
   }
+
+  clickHandler () {
+    alert('Hi :)')
+  }
+
+  changeHandler(event: Event) {
+    console.log(event)
+  }
 }

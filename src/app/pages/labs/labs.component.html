@@ -1,19 +1,26 @@
-<h3>{{ welcome }}</h3>
+<div class="container">
+  <h3>{{ welcome }}</h3>
 
-<ul>
-  <li *ngFor="let task of tasks">
-    {{ task }}
-  </li>
-</ul>
-<hr />
-<h2>{{ 'Hola'.repeat(3) }}</h2>
-<p>The sum of 3 +3  is {{ 3+3 }}</p>
-<hr />
-<img [src]="image" alt="" >
-<input type="text" value="Link">
-<input type="text" [value]="nickName">
-<button>Click me!</button>
-<button [disabled]="disabled">Click me!</button>
-<p>
-  Person: {{ person.nickName }}
-</p>
+  <ul>
+    <li *ngFor="let task of tasks">
+      {{ task }}
+    </li>
+  </ul>
+  <hr />
+  <h2>{{ 'Hola'.repeat(3) }}</h2>
+  <p>The sum of 3 +3  is {{ 3+3 }}</p>
+  <hr />
+  <img [src]="image" alt="" >
+  <input type="text" value="Link">
+  <input type="text" [value]="nickName">
+  <button>Click me!</button>
+  <button [disabled]="disabled">Click me!</button>
+  <p>
+    Person: {{ person.nickName }}
+  </p>
+  <hr />
+  <button (click)="clickHandler()">Click me</button>
+  <button (dblclick)="clickHandler()">Doble click me</button>
+  <p>(change)</p>
+  <input type="number" value="Link" (change)="changeHandler($event)">
+</div>
