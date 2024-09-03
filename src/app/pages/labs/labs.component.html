@@ -23,4 +23,8 @@
   <button (dblclick)="clickHandler()">Doble click me</button>
   <p>(change)</p>
   <input type="number" value="Link" (change)="changeHandler($event)">
+  <p>(keydown)</p>
+  <input type="text" [value]="person.nickName" (keydown)="keydownHandler($event)"/>
+  <p>(keydown shift t)</p>
+  <input type="text" [value]="person.nickName" (keydown.shift.t)="clickHandler()"/>
 </div>
