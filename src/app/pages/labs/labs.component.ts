@@ -1,20 +1,23 @@
+import { NgFor } from '@angular/common';
 import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
 export class LabsComponent {
 
   welcome = 'Hello from a variable'
-  tasks = [
+  
+  tasks = signal([
     'Install Angular CLI',
     'Create project',
     'Create component'
-  ]
+  ])
+
   private name = 'Zelda'
   nickName = signal('Zelda')
   disabled = true
