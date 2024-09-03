@@ -1,16 +1,16 @@
-import { NgFor } from '@angular/common';
+import { JsonPipe, NgFor } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, JsonPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  task = signal<Task[]>([
+  tasks = signal<Task[]>([
     { id: crypto.randomUUID(), title: 'Install Angular CLI', completed: false },
     { id: crypto.randomUUID(), title: 'Create project', completed: false },
     { id: crypto.randomUUID(), title: 'Create components', completed: false },
@@ -29,10 +29,21 @@ export class HomeComponent {
       completed: false
     }
 
-    this.task.update( (tasks) => [...tasks, newTask])
+    this.tasks.update( (tasks) => [...tasks, newTask])
   }
 
   deleteTask(index: number) {
-    this.task.update( (tasks) => tasks.filter( (task, position) => position !== index ) )
+    this.tasks.update( (tasks) => tasks.filter( (task, position) => position !== index ) )
+  }
+
+  updateTask(index: number) {
+    this.tasks.update( (tasks) => {
+      return tasks.map( (task, position) => {
+        if(position === index) {
+          return { ...task, completed: !task.completed }
+        }
+        return task
+      })
+    })
   }
 }
