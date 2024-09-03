@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +10,25 @@ import { Component, signal } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  task = signal([
-    'Install Angular CLI',
-    'Create project',
-    'Create components',
-    'Create services'
+  task = signal<Task[]>([
+    { id: crypto.randomUUID(), title: 'Install Angular CLI', completed: false },
+    { id: crypto.randomUUID(), title: 'Create project', completed: false },
+    { id: crypto.randomUUID(), title: 'Create components', completed: false },
+    { id: crypto.randomUUID(), title: 'Create services', completed: false },
   ])
 
   changeHandler(event: Event) {
     const input = event.target as HTMLInputElement
-    const newTask = input.value
+    this.addTask(input.value)
+  }
+
+  private addTask(title: string) {
+    const newTask: Task = {
+      id: crypto.randomUUID(),
+      title,
+      completed: false
+    }
+
     this.task.update( (tasks) => [...tasks, newTask])
   }
 
