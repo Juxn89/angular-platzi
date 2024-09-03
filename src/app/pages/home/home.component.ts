@@ -46,4 +46,8 @@ export class HomeComponent {
       })
     })
   }
+
+  getNumberOfPenddingTasks() {
+    return this.tasks().filter(task => !task.completed).length
+  }
 }

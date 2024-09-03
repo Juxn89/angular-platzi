@@ -17,7 +17,7 @@
   <button>Click me!</button>
   <button [disabled]="disabled">Click me!</button>
   <p>
-    Person: {{ person.nickName }}
+    Person: {{ person().nickName }}
   </p>
   <hr />
   <button (click)="clickHandler()">Click me</button>
@@ -25,10 +25,19 @@
   <p>(change)</p>
   <input type="number" value="Link" (change)="changeHandler($event)">
   <p>(keydown)</p>
-  <input type="text" [value]="person.nickName" (keydown)="keydownHandler($event)"/>
+  <input type="text" [value]="person().nickName" (keydown)="keydownHandler($event)"/>
   <p>(keydown shift t)</p>
-  <input type="text" [value]="person.nickName" (keydown.shift.t)="clickHandler()"/>
+  <input type="text" [value]="person().nickName" (keydown.shift.t)="clickHandler()"/>
   <hr/>
   <h1>Signals</h1>
   <p>{{ nickName() }}</p>
+  <div *ngIf="nickName() === 'Zelda'">
+    My Content
+  </div>
+  <div *ngIf="person().nickName === 'Zelda' && person().disabled === false; else elseBlock">
+    My Content 2
+  </div>
+  <ng-template #elseBlock>
+    Person is disabled!
+  </ng-template>
 </div>
