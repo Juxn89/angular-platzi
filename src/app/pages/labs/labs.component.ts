@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-labs',
@@ -16,7 +16,7 @@ export class LabsComponent {
     'Create component'
   ]
   private name = 'Zelda'
-  nickName = 'Zelda'
+  nickName = signal('Zelda')
   disabled = true
   image = 'https://static.platzi.com/media/achievements/badge-js-bases-84800303-16e4-420d-a934-d02cc60f4727.png'
 
@@ -32,6 +32,9 @@ export class LabsComponent {
 
   changeHandler(event: Event) {
     console.log(event)
+    const input = event.target as HTMLInputElement
+    const newvalue = input.value
+    this.nickName.set(newvalue)
   }
 
   keydownHandler(event: KeyboardEvent) {

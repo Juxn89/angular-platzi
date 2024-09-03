@@ -12,7 +12,7 @@
   <hr />
   <img [src]="image" alt="" >
   <input type="text" value="Link">
-  <input type="text" [value]="nickName">
+  <input type="text" [value]="nickName()" (change)="changeHandler($event)">
   <button>Click me!</button>
   <button [disabled]="disabled">Click me!</button>
   <p>
@@ -27,4 +27,7 @@
   <input type="text" [value]="person.nickName" (keydown)="keydownHandler($event)"/>
   <p>(keydown shift t)</p>
   <input type="text" [value]="person.nickName" (keydown.shift.t)="clickHandler()"/>
+  <hr/>
+  <h1>Signals</h1>
+  <p>{{ nickName() }}</p>
 </div>
