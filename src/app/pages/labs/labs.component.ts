@@ -1,10 +1,10 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
@@ -43,5 +43,17 @@ export class LabsComponent {
   keydownHandler(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement
     console.log(input.value)
+  }
+
+  changePersonName(event: Event) {
+    const input = event.target as HTMLInputElement
+    const newValaue = input.value
+
+    this.person.update(prevState => {
+      return {
+        ...prevState,
+        nickName: newValaue
+      }
+    })
   }
 }

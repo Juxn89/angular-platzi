@@ -40,4 +40,14 @@
   <ng-template #elseBlock>
     Person is disabled!
   </ng-template>
+
+  <hr />
+  <h2>NgSwitch</h2>
+  <input type="text" [value]="person().nickName" (change)="changePersonName($event)">
+  <div [ngSwitch]="person().nickName">
+    <p *ngSwitchCase="'Zelda'">I'm Zelda</p>
+    <p *ngSwitchCase="'Link'">I'm Link</p>
+    <p *ngSwitchCase="'Ganondorf'">I'm Ganondorf</p>
+    <p *ngSwitchDefault>I'm no one</p>
+  </div>
 </div>
