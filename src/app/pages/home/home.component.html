@@ -8,7 +8,8 @@
         placeholder="Type new todo"
         autofocus
         type="text"
-        (change)="changeHandler($event)"
+        [formControl]="newTaskControl"
+        (keydown.enter)="changeHandler()"
       />
     </div>
   </header>
@@ -63,7 +64,8 @@
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
         <strong>{{ getNumberOfPenddingTasks() }}</strong>
-        <span *ngIf="getNumberOfPenddingTasks() === 1">item left</span>
+        <span *ngIf="getNumberOfPenddingTasks() === 1"> item left</span>
+        <span *ngIf="getNumberOfPenddingTasks() >= 1"> items left</span>
       </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">

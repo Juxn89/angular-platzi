@@ -1,11 +1,12 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, JsonPipe, NgIf],
+  imports: [NgFor, JsonPipe, NgIf, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,9 +18,18 @@ export class HomeComponent {
     { id: crypto.randomUUID(), title: 'Create services', completed: false },
   ])
 
-  changeHandler(event: Event) {
-    const input = event.target as HTMLInputElement
-    this.addTask(input.value)
+  newTaskControl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  })
+
+  changeHandler() {
+    if(this.newTaskControl.valid) {
+      this.addTask(this.newTaskControl.value)
+      this.newTaskControl.setValue('')
+    }
   }
 
   private addTask(title: string) {
