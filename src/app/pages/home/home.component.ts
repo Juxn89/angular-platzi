@@ -26,10 +26,14 @@ export class HomeComponent {
   })
 
   changeHandler() {
-    if(this.newTaskControl.valid) {
-      this.addTask(this.newTaskControl.value)
-      this.newTaskControl.setValue('')
-    }
+    if(!this.newTaskControl.valid)
+      return
+
+    if(this.newTaskControl.value.trim() === '')
+      return
+
+    this.addTask(this.newTaskControl.value)
+    this.newTaskControl.setValue('')
   }
 
   private addTask(title: string) {
