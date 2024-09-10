@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Task } from '../../models/task.model';
+import { Filter } from '../../models/filter.model';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { Task } from '../../models/task.model';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  Filters = Filter
+
   tasks = signal<Task[]>([
     { id: crypto.randomUUID(), title: 'Install Angular CLI', completed: false },
     { id: crypto.randomUUID(), title: 'Create project', completed: false },
@@ -24,6 +27,24 @@ export class HomeComponent {
       Validators.required,
     ]
   })
+
+  filter = signal<Filter>(Filter.All)
+  taskFiltered = computed(() => {
+    const filter = this.filter()
+    const task = this.tasks()
+
+    if(filter === Filter.Pending)
+      return task.filter(t => !t.completed)
+
+    if(filter === Filter.Completed)
+      return task.filter(t => t.completed)
+
+    return task
+  })
+
+  changeFilter(filter: Filter) {
+    this.filter.set(filter)
+  }
 
   changeHandler() {
     if(!this.newTaskControl.valid)
