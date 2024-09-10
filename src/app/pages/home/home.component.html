@@ -72,19 +72,19 @@
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
         <strong>{{ getNumberOfPenddingTasks() }}</strong>
-        <span *ngIf="getNumberOfPenddingTasks() === 1"> item left</span>
-        <span *ngIf="getNumberOfPenddingTasks() >= 1"> items left</span>
+        <span *ngIf="getNumberOfPenddingTasks() === 1 else elseBlock"> item left</span>
+        <ng-template #elseBlock> items left</ng-template>
       </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected" (click)="changeFilter(Filters.All)">All</a>
+          <a routerLink="/" [class.selected]="filter() === Filters.All" (click)="changeFilter(Filters.All)">All</a>
         </li>
         <li>
-          <a routerLink="/pending" (click)="changeFilter(Filters.Pending)">Pending</a>
+          <a routerLink="/pending" [class.selected]="filter() === Filters.Pending" (click)="changeFilter(Filters.Pending)">Pending</a>
         </li>
         <li>
-          <a routerLink="/completed" (click)="changeFilter(Filters.Completed)">Completed</a>
+          <a routerLink="/completed" [class.selected]="filter() === Filters.Completed" (click)="changeFilter(Filters.Completed)">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->

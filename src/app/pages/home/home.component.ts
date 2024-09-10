@@ -1,5 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component, computed, effect, inject, Injector, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Task } from '../../models/task.model';
 import { Filter } from '../../models/filter.model';
@@ -12,14 +12,31 @@ import { Filter } from '../../models/filter.model';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  constructor() { }
+
+  injector = inject(Injector)
+
+  ngOnInit() {
+    const storage = localStorage.getItem('tasks')
+    if(storage) {
+      const tasks = JSON.parse(storage)
+      this.tasks.set(tasks)
+    }
+
+    this.trackTask()
+  }
+
+  trackTask() {
+    effect(() => {
+      const tasks = this.tasks()
+      localStorage.setItem('tasks', JSON.stringify(tasks))
+    }, {injector: this.injector})
+  }
+
   Filters = Filter
 
-  tasks = signal<Task[]>([
-    { id: crypto.randomUUID(), title: 'Install Angular CLI', completed: false },
-    { id: crypto.randomUUID(), title: 'Create project', completed: false },
-    { id: crypto.randomUUID(), title: 'Create components', completed: false },
-    { id: crypto.randomUUID(), title: 'Create services', completed: false },
-  ])
+  tasks = signal<Task[]>([])
 
   newTaskControl = new FormControl('', {
     nonNullable: true,
@@ -83,7 +100,7 @@ export class HomeComponent {
   }
 
   getNumberOfPenddingTasks() {
-    return this.tasks().filter(task => !task.completed).length
+    return this.taskFiltered().length
   }
 
   updateTaskEditingMode(index: number) {
