@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms'
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
@@ -33,6 +33,13 @@ export class LabsComponent {
   colorControl = new FormControl()
   widthControl = new FormControl(50, {
     nonNullable: true
+  })
+  nameControl = new FormControl('Zelda', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(3)
+    ]
   })
 
   constructor() {
