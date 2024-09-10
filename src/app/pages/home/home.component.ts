@@ -64,4 +64,34 @@ export class HomeComponent {
   getNumberOfPenddingTasks() {
     return this.tasks().filter(task => !task.completed).length
   }
+
+  updateTaskEditingMode(index: number) {
+    this.tasks.update( (tasks) => {
+      return tasks.map( (task, position) => {
+        if(position === index) {
+          return { ...task, editing: true }
+        }
+        return {
+          ...task,
+          editing: false
+        }
+      })
+    })
+  }
+
+  updateTaskText(index: number, event: Event) {
+    const input = event.target as HTMLInputElement
+    this.tasks.update( (tasks) => {
+      return tasks.map( (task, position) => {
+        if(position === index) {
+          return {
+            ...task,
+            editing: false,
+            title: input.value
+          }
+        }
+        return task
+      })
+    })
+  }
 }
