@@ -3,9 +3,11 @@
 
   <ul>
     <p>total: {{ tasks().length }}</p>
-    <li *ngFor="let task of tasks(); index as i">
-      {{ i }} - {{ task }}
-    </li>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>
+        {{ i }} - {{ task }}
+      </li>
+    }
   </ul>
   <hr />
   <h2>{{ 'Hola'.repeat(3) }}</h2>
@@ -31,24 +33,37 @@
   <hr/>
   <h1>Signals</h1>
   <p>{{ nickName() }}</p>
-  <div *ngIf="nickName() === 'Zelda'">
-    My Content
-  </div>
-  <div *ngIf="person().nickName === 'Zelda' && person().disabled === false; else elseBlock">
-    My Content 2
-  </div>
-  <ng-template #elseBlock>
+  @if (nickName() === 'Zelda') {
+    <div>
+      My Content
+    </div>
+  }
+  @if (person().nickName === 'Zelda' && person().disabled === false) {
+    <div>
+      My Content 2
+    </div>
+  } @else {
     Person is disabled!
-  </ng-template>
+  }
 
   <hr />
   <h2>NgSwitch</h2>
   <input type="text" [value]="person().nickName" (change)="changePersonName($event)">
-  <div [ngSwitch]="person().nickName">
-    <p *ngSwitchCase="'Zelda'">I'm Zelda</p>
-    <p *ngSwitchCase="'Link'">I'm Link</p>
-    <p *ngSwitchCase="'Ganondorf'">I'm Ganondorf</p>
-    <p *ngSwitchDefault>I'm no one</p>
+  <div>
+    @switch (person().nickName) {
+      @case ('Zelda') {
+        <p>I'm Zelda</p>
+      }
+      @case ('Link') {
+        <p>I'm Link</p>
+      }
+      @case ('Ganondorf') {
+        <p>I'm Ganondorf</p>
+      }
+      @default {
+        <p>I'm no one</p>
+      }
+    }
   </div>
   <hr />
   <input type="color" [formControl]="colorControl" />
@@ -83,35 +98,35 @@
     <div>Zelda is not disabled</div>
   }
   @else {
-    <div>Zelda is <strong>disabled</strong></div>
+  <div>Zelda is <strong>disabled</strong></div>
+}
+<h3>Loop For</h3>
+<ul>
+  @for (task of tasks(); track task; let i = $index) {
+    <li>{{i}} {{task}}</li>
   }
-  <h3>Loop For</h3>
-  <ul>
-    @for (task of tasks(); track task; let i = $index) {
-      <li>{{i}} {{task}}</li>
+  @empty {
+  <li>
+    <strong>The list is empty</strong>
+  </li>
+}
+</ul>
+<h3>Shitch</h3>
+<div>
+  @switch (person().nickName) {
+    @case ('Zelda') {
+      <p>I'm Zelda</p>
     }
-    @empty {
-      <li>
-        <strong>The list is empty</strong>
-      </li>
+    @case ('Link') {
+      <p>I'm Link</p>
     }
-  </ul>
-  <h3>Shitch</h3>
-  <div>
-    @switch (person().nickName) {
-      @case ('Zelda') {
-        <p>>I'm Zelda</p>
-      }
-      @case ('Link') {
-        <p>>I'm Link</p>
-      }
-      @case ('Ganondorf') {
-        <p>>I'm Ganondorf</p>
-      }
-      @default {
-        <p>I'm no one</p>
-      }
+    @case ('Ganondorf') {
+      <p>I'm Ganondorf</p>
     }
+    @default {
+      <p>I'm no one</p>
+    }
+  }
 
-  </div>
+</div>
 </div>
