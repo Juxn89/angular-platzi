@@ -72,4 +72,46 @@
   <p>
     <input type="text"/>
   </p>
+  <hr />
+  <h2>New Sintaxis</h2>
+  <h3>If</h3>
+  @if (nickName() === 'Zelda') {
+    <div>I'm Zelda</div>
+  }
+  <h3>If - else</h3>
+  @if(person().nickName === 'Zelda' && person().disabled === false) {
+    <div>Zelda is not disabled</div>
+  }
+  @else {
+    <div>Zelda is <strong>disabled</strong></div>
+  }
+  <h3>Loop For</h3>
+  <ul>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>{{i}} {{task}}</li>
+    }
+    @empty {
+      <li>
+        <strong>The list is empty</strong>
+      </li>
+    }
+  </ul>
+  <h3>Shitch</h3>
+  <div>
+    @switch (person().nickName) {
+      @case ('Zelda') {
+        <p>>I'm Zelda</p>
+      }
+      @case ('Link') {
+        <p>>I'm Link</p>
+      }
+      @case ('Ganondorf') {
+        <p>>I'm Ganondorf</p>
+      }
+      @default {
+        <p>I'm no one</p>
+      }
+    }
+
+  </div>
 </div>
