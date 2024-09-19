@@ -1,10 +1,22 @@
-<p>
+<!-- <p>
   <input type="number" [value]="duration()" (change)="changeDuration($event)"/>
 </p>
 <p>
   <input type="text" [value]="message()" (change)="changeMessage($event)"/>
-</p>
+</p> -->
 
-@if (duration() > 0) {
+<div class="p-16 ">
+  <h1 class="text-lg font-bold">Aboud</h1>
+  <p class="text-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae odio asperiores totam deserunt enim, eum iure aut, nostrum unde vero quisquam cum corrupti, odit autem maiores veritatis? Officiis, eius consequatur.</p>
+  <p class="text-xs">
+    Clients counter
+    <app-counter [duration]="duration()" [message]="message()" />
+  </p>
+  <div>
+    <app-wave-audio audioURL="assets/audio.mp3"/>
+  </div>
+</div>
+
+<!-- @if (duration() > 0) {
   <app-counter [duration]="duration()" [message]="message()" />
-}
+} -->
