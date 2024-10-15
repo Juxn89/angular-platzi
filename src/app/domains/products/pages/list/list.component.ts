@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from '../../../products/components/product/product.component'
 import { Product } from '../../../shared/components/counter/models/products.model';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,8 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
 })
 export class ListComponent {
   products = signal<Product[]>([])
-  cart = signal<Product[]>([])
+
+  private cartService = inject(CartService)
 
   constructor() {
     const initProducts: Product[] = [
@@ -68,6 +70,6 @@ export class ListComponent {
     // console.log('Were are in the parent')
     // console.log(event)
 
-    this.cart.update(prevState => [...prevState, product])
+    this.cartService.addToCart(product)
   }
 }
