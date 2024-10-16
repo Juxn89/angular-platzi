@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product } from '../../../shared/components/counter/models/products.model';
+
+import { Product } from '@shared/components/counter/models/products.model';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [],
+  imports: [ CommonModule ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
