@@ -1,4 +1,7 @@
+import { formatDistance } from 'date-fns'
+
 import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Pipe({
   name: 'timeAgo',
@@ -6,8 +9,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TimeAgoPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: string): string {
+    const date = new Date(value)
+    const today = new Date()
+
+    return formatDistance(today, date)
   }
 
 }
