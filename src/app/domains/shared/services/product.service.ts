@@ -11,8 +11,14 @@ export class ProductService {
 
   constructor() { }
 
-  getProducts() {
-   return this.http.get<Product[]>(this.BASE_URL)
+  getProducts(categroyId?: string) {
+    const url = new URL(this.BASE_URL)
+
+    if(categroyId) {
+      url.searchParams.set('categoryId', categroyId)
+    }
+
+    return this.http.get<Product[]>(url.toString())
   }
 
   getOne(id: string) {

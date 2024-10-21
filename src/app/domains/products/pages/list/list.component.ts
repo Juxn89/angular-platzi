@@ -1,25 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
-
-import { ProductComponent } from '@product/components/product/product.component'
+import { RouterLinkWithHref } from '@angular/router';
+import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
 
 import { CartService } from '@shared/services/cart.service';
 import { ProductService } from '@shared/services/product.service';
-import { HeaderComponent } from '@shared/components/header/header.component';
+import { CategoryService } from '@shared/services/category.service';
 import { Product } from '@shared/components/counter/models/products.model';
+import { Category } from '@shared/components/counter/models/category.model';
+import { HeaderComponent } from '@shared/components/header/header.component';
+import { ProductComponent } from '@product/components/product/product.component'
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ProductComponent, CommonModule, HeaderComponent],
+  imports: [ProductComponent, CommonModule, HeaderComponent, RouterLinkWithHref],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListComponent {
   products = signal<Product[]>([])
+  categories = signal<Category[]>([])
 
   private cartService = inject(CartService)
   private productService = inject(ProductService)
+  private categoryService = inject(CategoryService)
+
+  @Input() category_id?: string;
 
   constructor() {
     const initProducts: Product[] = [
@@ -71,7 +77,22 @@ export class ListComponent {
   }
 
   ngOnInit() {
-    this.productService.getProducts()
+    this.getCategories()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.getProducts()
+  }
+
+  fromChild(product: Product) {
+    // console.log('Were are in the parent')
+    // console.log(event)
+
+    this.cartService.addToCart(product)
+  }
+
+  private getProducts() {
+    this.productService.getProducts(this.category_id)
       .subscribe({
         next: (products) => {
           this.products.set(products)
@@ -80,10 +101,13 @@ export class ListComponent {
       })
   }
 
-  fromChild(product: Product) {
-    // console.log('Were are in the parent')
-    // console.log(event)
-
-    this.cartService.addToCart(product)
+  private getCategories() {
+    this.categoryService.getAll()
+    .subscribe({
+      next: (category) => {
+        this.categories.set(category)
+      },
+      error: () => { }
+    })
   }
 }
