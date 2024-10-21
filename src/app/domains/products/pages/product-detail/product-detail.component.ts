@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, Signal, signal } from '@angular/core';
-import { Product } from '@shared/components/counter/models/products.model';
+import { Component, inject, Input, signal } from '@angular/core';
+
+import { CartService } from '@shared/services/cart.service';
 import { ProductService } from '@shared/services/product.service';
+import { Product } from '@shared/components/counter/models/products.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,7 +15,9 @@ import { ProductService } from '@shared/services/product.service';
 export class ProductDetailComponent {
   @Input() id?: string
   product = signal<Product | null>(null)
+  cover = signal<string>('')
   private productService = inject(ProductService)
+  private cartService = inject(CartService)
 
   ngOnInit() {
     if(this.id) {
@@ -21,9 +25,25 @@ export class ProductDetailComponent {
         .subscribe({
           next: (product) => {
             this.product.set(product)
-            console.log('---->', product)
+
+            if(product.images !== undefined && product.images?.length > 0) {
+              this.cover.set(product.images[0])
+            }
+            // console.log('---->', product)
           }
         })
+    }
+  }
+
+  changeCover(newImage: string) {
+    this.cover.set(newImage)
+  }
+
+  addToCart() {
+    const currentProduct = this.product()
+
+    if(currentProduct) {
+      this.cartService.addToCart(currentProduct)
     }
   }
 }
