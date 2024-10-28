@@ -24,7 +24,8 @@
       "dom"
     ],
     "paths": {
-      "@models/*": [ "./src/app/models/*" ]
+      "@components/*": [ "./src/app/components/*" ],
+      "@models/*": [ "./src/app/models/*" ],
     }
   },
   "angularCompilerOptions": {

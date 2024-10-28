@@ -47,10 +47,10 @@ export class ImageComponent {
       - Runs once time
     */
 
-    this.counterFunction = window.setInterval(() => {
-      this.counter += 1
-      console.log(this.counter)
-    }, 1000);
+    // this.counterFunction = window.setInterval(() => {
+    //   this.counter += 1
+    //   console.log(this.counter)
+    // }, 1000);
   }
 
   ngAfterViewInit() {

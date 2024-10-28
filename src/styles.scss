@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.product--grid {
+  app-image {
+    img {
+      border-radius: 10px;
+    }
+  }
+}
