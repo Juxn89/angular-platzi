@@ -13,6 +13,7 @@ import { Product } from '@models/product.model';
 })
 export class AppComponent {
   title = 'my-store';
+  showImageComponent = false
   imgParent = signal<string>('https://www.w3schools.com/howto/img_avatar.png')
   products: Product[] = [
     {
@@ -31,5 +32,9 @@ export class AppComponent {
 
   onLoaded(img: string) {
     console.log('Log from father', img)
+  }
+
+  toogleImge() {
+    this.showImageComponent = !this.showImageComponent
   }
 }

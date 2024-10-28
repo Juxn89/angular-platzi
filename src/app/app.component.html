@@ -1,5 +1,9 @@
+<button (click)="toogleImge()">Toogle image</button>
+<p>{{ showImageComponent }}</p>
 <input type="text" [value]="imgParent()" (change)="onChangeValue($event)"/>
-<app-image [img]="imgParent()" (loaded)="onLoaded($event)"/>
+@if(showImageComponent) {
+  <app-image [img]="imgParent()" (loaded)="onLoaded($event)"/>
+}
 <br />
 @for (item of products; track $index) {
   <app-product [product]="item" />

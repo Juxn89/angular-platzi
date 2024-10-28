@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-image',
@@ -11,6 +11,15 @@ export class ImageComponent {
   @Input() img: string = 'Initial value'
   @Output() loaded = new EventEmitter<string>()
 
+  img2: string = ''
+  @Input() set changeImg2(newImg2: string) {
+    this.img2 = newImg2
+    console.log('Change img2')
+  }
+
+  counter = 0
+  counterFunction: number | undefined
+
   constructor() {
     console.log('1. Construnctor')
     /*
@@ -20,13 +29,14 @@ export class ImageComponent {
     */
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     console.log('2. ngOnChanges')
     /*
       - Before render
       - Update changes in inputs
       - Runs many times
     */
+   console.log('Changes -->', changes)
   }
 
   ngOnInit() {
@@ -36,6 +46,11 @@ export class ImageComponent {
       - Can execute async tasks
       - Runs once time
     */
+
+    this.counterFunction = window.setInterval(() => {
+      this.counter += 1
+      console.log(this.counter)
+    }, 1000);
   }
 
   ngAfterViewInit() {
@@ -51,7 +66,13 @@ export class ImageComponent {
     /*
       - Runs when the component is deleted
     */
+    if(typeof window !== 'undefined') {
+      console.log('--->', window)
+      window.clearInterval(this.counterFunction)
+    }
   }
+
+
 
   imgError() {
     this.img = 'https://img.freepik.com/premium-vector/vector-flat-illustration-avatar-user-profile-person-icon-profile-picture-suitable-social-media-profiles-icons-screensavers-as-templatex9xa_719432-1395.jpg?semt=ais_hybrid'
