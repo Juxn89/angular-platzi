@@ -1,0 +1,6 @@
+@if(img){
+  <img [src]="img" width="200" height="200" (error)="imgError()" (load)="imgLoaded()"/>
+}
+@else {
+  <img src="https://img.freepik.com/free-vector/404-error-lost-space-concept-illustration_114360-7971.jpg" width="200" height="200"/>
+}
