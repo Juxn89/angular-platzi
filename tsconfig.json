@@ -25,7 +25,9 @@
     ],
     "paths": {
       "@components/*": [ "./src/app/components/*" ],
+      "@directives/*": [ "./src/app/directives/*" ],
       "@models/*": [ "./src/app/models/*" ],
+      "@pipes/*": [ "./src/app/pipes/*" ],
       "@services/*": [ "./src/app/services/*" ],
     }
   },

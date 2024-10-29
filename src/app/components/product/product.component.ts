@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, Pipe } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { Product } from '@models/product.model';
-import { ImageComponent } from "../image/image.component";
+import { ReversePipe } from '@pipes/reverse.pipe';
+import { ImageComponent } from '@components/image/image.component';
+import { HighlightDirective } from '../../directives/highlight.directive';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, ImageComponent],
+  imports: [CommonModule, ImageComponent, ReversePipe, HighlightDirective],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
