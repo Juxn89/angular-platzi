@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { StoreService } from '@services/store.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,6 +10,14 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
   showMenu: boolean = false
+  counter: number = 0
+  private storeService = inject(StoreService)
+
+  ngOnInit() {
+    this.storeService.myCart$.subscribe(products => {
+      this.counter = products.length
+    })
+  }
 
   toogleMenu() {
     this.showMenu = !this.showMenu
