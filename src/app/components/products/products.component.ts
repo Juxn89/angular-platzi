@@ -10,6 +10,9 @@ import { Product } from '@models/product.model';
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
+  myShoppingCart: Product[] = []
+  total: number = 0
+
   products: Product[] = [
     {
       id: 1,
@@ -36,4 +39,9 @@ export class ProductsComponent {
       price: 100
     },
   ]
+
+  onAddToShoppingCart(product: Product) {
+    this.myShoppingCart.push(product)
+    this.total = this.myShoppingCart.reduce( (sum, item) => sum += item.price, 0 )
+  }
 }
