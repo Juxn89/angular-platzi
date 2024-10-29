@@ -7,7 +7,6 @@ import { Product } from '@models/product.model';
   providedIn: 'root'
 })
 export class StoreService {
-  constructor() { }
 
   private myShoppingCart: Product[] = []
   private myCart = new BehaviorSubject<Product[]>([])

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { Product } from '@models/product.model';
 import { TimeAgoPipe } from '@pipes/time-ago.pipe';
@@ -14,16 +14,14 @@ import { ProductComponent } from '@components/product/product.component';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent {
-  total: number = 0
+export class ProductsComponent implements OnInit {
+  total = 0
   products: Product[] = []
   today = new Date()
   date = new Date(2021, 1, 21)
 
   private storeService = inject(StoreService)
   private productService = inject(ProductService)
-
-  constructor() {}
 
   ngOnInit() {
     this.productService.getAllProducts()

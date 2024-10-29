@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { StoreService } from '@services/store.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { StoreService } from '@services/store.service';
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss'
 })
-export class NavComponent {
-  showMenu: boolean = false
-  counter: number = 0
+export class NavComponent implements OnInit {
+  showMenu = false
+  counter = 0
   private storeService = inject(StoreService)
 
   ngOnInit() {
