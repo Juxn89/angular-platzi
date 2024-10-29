@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { ProductComponent } from '@components/product/product.component';
+import { Component, inject, Inject } from '@angular/core';
+
 import { Product } from '@models/product.model';
+import { StoreService } from '@services/store.service';
+import { ProductService } from '@services/product.service';
+import { ProductComponent } from '@components/product/product.component';
 
 @Component({
   selector: 'app-products',
@@ -10,38 +13,23 @@ import { Product } from '@models/product.model';
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
-  myShoppingCart: Product[] = []
   total: number = 0
+  products: Product[] = []
 
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Product #1',
-      image: 'https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dw12a66582/images/funko/upload/80686_Batman85th_Belltower_BattleBatman_POP_Front-HiRes.png?sw=800&sh=800',
-      price: 100
-    },
-    {
-      id: 1,
-      name: 'Funko POP Movies: Watchmen Dr. Manhattan Figura de acción',
-      image: 'https://m.media-amazon.com/images/I/61mxAkcQdoL.jpg',
-      price: 35
-    },
-    {
-      id: 1,
-      name: 'Funko Pop! TV: La Oficina - Dwight Schrute',
-      image: 'https://m.media-amazon.com/images/I/714L-AZpgiL._AC_UL320_.jpg',
-      price: 100
-    },
-    {
-      id: 1,
-      name: 'Batman Funko POP: Película Dark Knight The Joker',
-      image: 'https://m.media-amazon.com/images/I/51ccWyK1L2L._AC_SX569_.jpg',
-      price: 100
-    },
-  ]
+  private storeService = inject(StoreService)
+  private productService = inject(ProductService)
+
+  constructor() {}
+
+  ngOnInit() {
+    this.productService.getAllProducts()
+      .subscribe(data => {
+        this.products = data
+      })
+  }
 
   onAddToShoppingCart(product: Product) {
-    this.myShoppingCart.push(product)
-    this.total = this.myShoppingCart.reduce( (sum, item) => sum += item.price, 0 )
+    this.storeService.addProduct(product)
+    this.total = this.storeService.getTotal()
   }
 }

@@ -1,6 +1,3 @@
-<p>
-  {{ total }}
-</p>
 <div class="product--grid">
   @for (item of products; track $index) {
     <app-product [product]="item" (addedProduct)="onAddToShoppingCart($event)"/>
