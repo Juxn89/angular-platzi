@@ -1,18 +1,3 @@
-<p>
-  Today: {{ today | date }}
-</p>
-<p>
-  Today: {{ date | date: 'short' }}
-</p>
-<p>
-  Today: {{ date | date: 'yyyy.dd.MM' }}
-</p>
-<p>
-  Ago: {{ date | timeAgo }}
-</p>
-<p>
-  {{ 'HoLa mUndo' | uppercase }}
-</p>
 <div class="product--grid">
   @for (item of products; track $index) {
     <app-product [product]="item" (addedProduct)="onAddToShoppingCart($event)"/>
