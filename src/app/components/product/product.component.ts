@@ -16,8 +16,13 @@ import { HighlightDirective } from '../../directives/highlight.directive';
 export class ProductComponent {
   @Input() product!: Product;
   @Output() addedProduct = new EventEmitter<Product>()
+  @Output() showProduct = new EventEmitter<number>()
 
   AddToCart() {
     this.addedProduct.emit(this.product)
+  }
+
+  ShowDetail() {
+    this.showProduct.emit(this.product.id)
   }
 }

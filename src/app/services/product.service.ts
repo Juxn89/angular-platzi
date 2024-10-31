@@ -7,9 +7,14 @@ import { Product } from '@models/product.model';
 })
 export class ProductService {
 
+  private readonly BASE_URL = 'https://api.escuelajs.co/api/v1/products'
   private http = inject(HttpClient)
 
   getAllProducts() {
-    return this.http.get<Product[]>('https://young-sands-07814.herokuapp.com/api/products')
+    return this.http.get<Product[]>(this.BASE_URL)
+  }
+
+  getProduct(id: number) {
+    return this.http.get<Product>(`${this.BASE_URL}/${id}`)
   }
 }

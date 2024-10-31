@@ -1,5 +1,24 @@
+<button (click)="toogleProductDetail()" >Click</button>
 <div class="product--grid">
   @for (item of products; track $index) {
-    <app-product [product]="item" (addedProduct)="onAddToShoppingCart($event)"/>
+    <app-product
+      [product]="item"
+      (addedProduct)="onAddToShoppingCart($event)"
+      (showProduct)="onShowDetail($event)"
+    />
+  }
+</div>
+<div class="product-detail" [class.active]="showProductDetail">
+  @if(productChosen){
+    <div>
+      <button (click)="toogleProductDetail()">Close</button>
+      <h1>{{ productChosen.title }}</h1>
+      <swiper-container>
+        <swiper-slide *ngFor="let image of productChosen.images">
+          <img [src]="image" alt=""/>
+        </swiper-slide>
+      </swiper-container>
+      <p> {{ productChosen.description }} </p>
+    </div>
   }
 </div>
