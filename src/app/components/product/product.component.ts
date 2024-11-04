@@ -5,11 +5,12 @@ import { Product } from '@models/product.model';
 import { ReversePipe } from '@pipes/reverse.pipe';
 import { ImageComponent } from '@components/image/image.component';
 import { HighlightDirective } from '../../directives/highlight.directive';
+import { TruncateTextPipe } from '@pipes/truncate-text.pipe';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, ImageComponent, ReversePipe, HighlightDirective],
+  imports: [CommonModule, ImageComponent, ReversePipe, HighlightDirective, TruncateTextPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })

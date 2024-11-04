@@ -2,7 +2,7 @@
   <app-image [img]="product.images[0]" alt="" />
 }
 <h2>{{ product.price | currency: '$' : 'symbol': '1.0' }}</h2>
-<p>{{ product.title | reverse }}</p>
-<p>{{ product.description }}</p>
+<!-- <p>{{ product.title | reverse }}</p> -->
+<p>{{ product.description | truncateText }}</p>
 <button (click)="ShowDetail()" >Show detail</button>
 <button (click)="AddToCart()" >Add to cart</button>
