@@ -1,12 +1,13 @@
 <button (click)="createNewProduct()" >Create</button>
 <div class="product--grid">
-  @for (item of products; track $index) {
+  @for (item of products(); track $index) {
     <app-product
       [product]="item"
       (addedProduct)="onAddToShoppingCart($event)"
       (showProduct)="onShowDetail($event)"
     />
   }
+  <button (click)="loadMore()">Load more</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
   @if(productChosen){
