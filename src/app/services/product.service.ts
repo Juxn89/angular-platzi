@@ -1,3 +1,4 @@
+import { retry } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { CreateProductDto, Product, UpdateProductDto } from '@models/product.model';
@@ -18,6 +19,9 @@ export class ProductService {
     }
 
     return this.http.get<Product[]>(this.BASE_URL, { params })
+            .pipe(
+              retry(3)
+            )
   }
 
   getProduct(id: number) {
