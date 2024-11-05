@@ -1,7 +1,16 @@
-import { HttpEvent, HttpEventType, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { HttpContext, HttpContextToken, HttpEvent, HttpEventType, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+
+const CHECK_TIME = new HttpContextToken<boolean>(() => false)
+
+export const checkTime = () => {
+  return new HttpContext().set(CHECK_TIME, true)
+}
 
 export const timeInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
+  if(!req.context.get(CHECK_TIME))
+    return next(req);
+
   const timeStart = performance.now()
   return next(req).pipe(
     tap((event) => {
