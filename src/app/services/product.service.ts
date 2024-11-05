@@ -1,4 +1,4 @@
-import { catchError, retry, throwError } from 'rxjs';
+import { catchError, map, retry, throwError } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http'
 import { CreateProductDto, Product, UpdateProductDto } from '@models/product.model';
@@ -20,7 +20,8 @@ export class ProductService {
 
     return this.http.get<Product[]>(this.BASE_URL, { params })
             .pipe(
-              retry(3)
+              retry(3),
+              map( products => products.map(product => ({...product, taxes: product.price * 0.19 })) )
             )
   }
 
