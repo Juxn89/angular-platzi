@@ -17,6 +17,7 @@ import { ProductsComponent } from '@components/products/products.component'
 export class AppComponent {
   private authService = inject(AuthService)
   private userService = inject(UsersService)
+  private token = ''
 
   title = 'my-store';
   showImageComponent = false
@@ -43,6 +44,12 @@ export class AppComponent {
 
   login() {
     this.authService.login('sebas@mymail.com', '123456')
+    .subscribe(response => this.token = response.access_token)
+  }
+
+  getProfile() {
+    console.log(this.token)
+    this.authService.profile(this.token)
     .subscribe(response => console.log(response))
   }
 }

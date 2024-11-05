@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+
 import { Auth } from '@models/auth.model';
+import { User } from '@models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,10 @@ export class AuthService {
   }
 
   profile(token: string) {
-    return this.http.get(`${this.BASE_URl}/profile`, { headers: { 'Authorization': `Bearer ${token}` } })
+    // const headers = new HttpHeaders()
+    // headers.set('Authorization', `Bearer ${token}`)
+    return this.http.get<User>(`${this.BASE_URl}/profile`, { headers: { 'Authorization': `Bearer ${token}` } })
+
+    // return this.http.get<User>(`${this.BASE_URl}/profile`, { headers })
   }
 }
