@@ -1,12 +1,13 @@
+import { switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 
-import { CreateProductDto, Product } from '@models/product.model';
 import { TimeAgoPipe } from '@pipes/time-ago.pipe';
 import { StoreService } from '@services/store.service';
 import { ProductService } from '@services/product.service';
-import { ProductComponent } from '@components/product/product.component';
 import { TruncateTextPipe } from '@pipes/truncate-text.pipe';
+import { CreateProductDto, Product } from '@models/product.model';
+import { ProductComponent } from '@components/product/product.component';
 
 @Component({
   selector: 'app-products',
@@ -109,6 +110,26 @@ export class ProductsComponent implements OnInit {
     this.productService.getProductsByPage(this.limit, this.offset)
     .subscribe(data => {
       this.products.update((currentValues) => [...currentValues, ...data])
+    })
+  }
+
+  readAndUpdate(id: number) {
+    this.productService.getProduct(id)
+    .pipe(
+      switchMap( (product) => this.productService.update(product.id, { title: 'change'})),
+      switchMap( (product) => this.productService.update(product.id, { title: 'change2'})),
+      switchMap( (product) => this.productService.update(product.id, { title: 'change3'})),
+    )
+    .subscribe(data => {
+      console.log(data)
+    })
+
+    this.productService.fetchReadAndUpdate(id, { title: 'Title updated' })
+    .subscribe(response => {
+      const read = response[0]
+      const update = response[1]
+
+      console.log({ read, update })
     })
   }
 

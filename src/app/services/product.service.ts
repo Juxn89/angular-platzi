@@ -1,7 +1,7 @@
-import { catchError, map, retry, throwError } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http'
+import { catchError, map, retry, throwError, zip } from 'rxjs';
 import { CreateProductDto, Product, UpdateProductDto } from '@models/product.model';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +55,12 @@ export class ProductService {
 
   delete(id: number) {
     return this.http.delete<boolean>(`${this.BASE_URL}/${id}`)
+  }
+
+  fetchReadAndUpdate(id: number, product: UpdateProductDto) {
+    return  zip(
+        this.getProduct(id),
+        this.update(id, product)
+      )
   }
 }
