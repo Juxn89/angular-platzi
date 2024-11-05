@@ -1,10 +1,11 @@
 import { routes } from './app.routes';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 
 import { timeInterceptor } from '@interceptors/time.interceptor';
 import { provideClientHydration } from '@angular/platform-browser';
+import { tokenInterceptor } from '@interceptors/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(
-      withInterceptors([ timeInterceptor ])
+      withInterceptors([ timeInterceptor, tokenInterceptor ]),
+      withFetch()
     ),
   ]
 };
