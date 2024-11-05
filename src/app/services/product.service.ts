@@ -1,6 +1,6 @@
-import { retry } from 'rxjs';
+import { catchError, retry, throwError } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http'
 import { CreateProductDto, Product, UpdateProductDto } from '@models/product.model';
 
 @Injectable({
@@ -26,6 +26,16 @@ export class ProductService {
 
   getProduct(id: number) {
     return this.http.get<Product>(`${this.BASE_URL}/${id}`)
+      .pipe(
+        catchError( (error: HttpErrorResponse) => {
+
+          if(error.status === HttpStatusCode.InternalServerError) return throwError('Something is wrong with the server')
+          if(error.status === HttpStatusCode.NotFound) return throwError('Product not exits')
+          if(error.status === HttpStatusCode.Unauthorized) return throwError('You are not authorized')
+
+          return throwError('Ups, something was wrong')
+        })
+      )
   }
 
   getProductsByPage(limit:number, offset: number) {

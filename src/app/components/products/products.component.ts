@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
   total = 0
   limit = 10
   offset = 0
+  statusRequestDetail: 'loading' | 'success' | 'error' | 'init' = 'init'
   products = signal<Product[]>([])
   showProductDetail = false
   productChosen!: Product;
@@ -47,10 +48,16 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(productId: number) {
+    this.statusRequestDetail = 'loading'
+
     this.productService.getProduct(productId)
       .subscribe(data => {
         this.productChosen = data
         this.toogleProductDetail()
+        this.statusRequestDetail = 'success'
+      }, error => {
+        console.error(error)
+        this.statusRequestDetail = 'error'
       })
   }
 
