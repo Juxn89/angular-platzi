@@ -9,4 +9,16 @@
 <button (click)="createUser()">Create user</button>
 <button (click)="login()">Login</button>
 <button (click)="getProfile()">Get profile</button>
+<p>
+  <a href="/assets/files/text.txt" download="">Download</a>
+</p>
+<p>
+  <button (click)="downloadPDF()">Download PDF</button>
+</p>
+<p>
+  <input type="file" (change)="onUpload($event)"/>
+  @if(fileUploadedURL !== null) {
+    <a [href]="fileUploadedURL" download="">Download file uploaded</a>
+  }
+</p>
 <app-products />
